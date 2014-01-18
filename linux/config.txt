@@ -1,0 +1,9 @@
+# Tests are run on emulated Android device using scripts from https://github.com/apolukhin/regression_android <br>
+# In case of any questions contact me: antoshkka -!at!- gmail.com<br><br>
+
+# Config params: <br> 
+
+TOOLSETNAME=gcc-androiddebug
+RUNNERNAME=apolukhin-Android
+TAGNAME=develop
+ANDROID_EXEC_DIR=/data/local/tmp/
