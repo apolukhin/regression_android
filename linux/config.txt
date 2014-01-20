@@ -6,4 +6,3 @@
 TOOLSETNAME=gcc-androiddebug
 RUNNERNAME=apolukhin-Android
 TAGNAME=develop
-ANDROID_EXEC_DIR=/data/local/tmp/
