@@ -3,10 +3,9 @@
 # (See accompanying file LICENSE_1_0.txt or http://www.boost.org/LICENSE_1_0.txt)
 
 # HOWTO: 
-# * Put this file to boost_1_53_0/tools/build/v2 folder or to home folder
-# * Redefine AndroidNDKRoot and AndroidBinariesPath in this file
-# * Run bjam -j8 threadapi=pthread target-os=linux toolset=gcc-android stage
-#       options --with-regex --with-test --with-system --with-log --with-serialization --with-graph --with-filesystem stage
+# * Put this file to boost_1_XX_0/tools/build/v2 folder or to home folder
+# * Redefine AndroidNDKRoot and AndroidGccVersion in this file
+# * Run bjam -j8 threadapi=pthread target-os=android toolset=gcc-androiddebig stage
 
 
 #   This file is used to configure your Boost.Build installation. You can modify
@@ -16,14 +15,6 @@
 #   http://www.boost.org/boost-build2/doc/html/bbv2/overview/configuration.html
 #
 # for documentation about possible permanent locations.
-
-#   This file specifies which toolsets (C++ compilers), libraries, and other
-# tools are available. Often, you should be able to just uncomment existing
-# example lines and adjust them to taste. The complete list of supported tools,
-# and configuration instructions can be found at:
-#
-#   http://boost.org/boost-build2/doc/html/bbv2/reference/tools.html
-#
 
 #   This file uses Jam language syntax to describe available tools. Mostly,
 # there are 'using' lines, that contain the name of the used tools, and
@@ -38,11 +29,13 @@
 #
 #   http://boost.org/boost-build2/doc/html/bbv2/advanced.html#bbv2.advanced.jam_language
 
-using gcc : toolsets : g++-4.7 ;
+
 
 # --------------------------------------------------------------------
 # Android configurations.
 # --------------------------------------------------------------------
+
+using gcc : toolsets : g++-4.7 ;
 
 AndroidNDKRoot = /home/antoshkka/boost_maintain/android/android-ndk-r8e ;
 
@@ -53,11 +46,28 @@ AndroidNativeApiLevel = 9 ;
 AndroidArch = arm ;     
 
 AndroidGccVersion = 4.7 ;
-AndroidHostName = linux-x86_64 ; # windows ;
+
+# --------------------------------------------------------------------
+# --------------------------------------------------------------------
+
+
+
+import os ;
+
+if [ os.name ] = CYGWIN || [ os.name ] = NT
+{
+    AndroidHostName = windows ;
+}
+else if [ os.name ] = LINUX
+{
+    AndroidHostName = linux-x86_64 ;
+}
+else if [ os.name ] = MACOSX
+{
+    AndroidHostName = darwin-x86 ;
+}
 
 AndroidBinariesPath = $(AndroidNDKRoot)/toolchains/$(AndroidArch)-linux-androideabi-$(AndroidGccVersion)/prebuilt/$(AndroidHostName)/bin ;
-# --------------------------------------------------------------------
-# --------------------------------------------------------------------
 
 # Does not work
 #JAMSHELL = d:/testing_boost_android/run_on_android.bat % ;
