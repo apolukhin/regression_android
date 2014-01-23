@@ -14,4 +14,5 @@ adb shell "rm -f ${ANDROID_EXEC_DIR}/${BINARY_NAME}; chmod 666 ${ANDROID_EXEC_DI
 adb shell "cat ${ANDROID_EXEC_DIR}/${BINARY_NAME}.errorlog" 2>/dev/null
 adb shell "rm -f ${ANDROID_EXEC_DIR}/${BINARY_NAME}.errorlog ; rm -f ${ANDROID_EXEC_DIR}/${BINARY_NAME};" 1>/dev/null 2>&1
 chmod +x ec.sh
+wait `lsof -t ec.sh` 1>/dev/null 2>&1
 ./ec.sh
